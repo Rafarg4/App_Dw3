@@ -4,6 +4,6 @@
 	<title>Inicio</title>
 </head>
 <body>
-<p>Hola mundo</p>
+<p>Hola Mundo prueba</p>
 </body>
 </html>
