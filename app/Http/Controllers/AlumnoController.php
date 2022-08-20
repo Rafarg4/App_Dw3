@@ -14,7 +14,7 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-       $alumnos = Alumno::paginate(1);
+       $alumnos = Alumno::paginate(2);
        return view('alumnos.index',compact(
         'alumnos'));  
     
@@ -27,7 +27,7 @@ class AlumnoController extends Controller
      */
     public function create()
     {
-        //
+        return view('alumnos.create');
     }
 
     /**
@@ -38,7 +38,9 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $alumnos= request()->except('_token');
+        Alumno::insert($alumnos);
+        return redirect (route('alumnos.index'));
     }
 
     /**
