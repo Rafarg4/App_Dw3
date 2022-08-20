@@ -14,7 +14,7 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-       $alumnos = Alumno::paginate(2);
+       $alumnos = Alumno::paginate(4);
        return view('alumnos.index',compact(
         'alumnos'));  
     
@@ -83,8 +83,9 @@ class AlumnoController extends Controller
      * @param  \App\Models\Alumno  $alumno
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Alumno $alumno)
+    public function destroy($id)
     {
-        //
+        Alumno::destroy($id);
+        return redirect('alumnos');
     }
 }

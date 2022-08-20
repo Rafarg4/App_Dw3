@@ -1,7 +1,6 @@
+
 <link rel="stylesheet" type="text/css" href="{{asset('css/estilos.css')}}">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 
 <div class="container">
 	<h1>Lista de Alumnos</h1>
@@ -16,6 +15,10 @@
 				<th>ci</th>
 				<th>Telefono</th>
 				<th>Direccion</th>
+				<th>Gmail</th>
+				<th>Profesion</th>
+				<th>Genero</th>
+					<th>Fecha de nacimineto</th>				
 			</tr>
 		</thead>
 		<tbody>
@@ -27,7 +30,19 @@
 				<td>{{$a->ci}}</td>
 				<td>{{$a->telefono}}</td>
 				<td>{{$a->direccion}}</td>
-			</tr>
+				<td>{{$a->gmail}}</td>
+				<td>{{$a->profesion}}</td>
+				<td>{{$a->genero}}</td>
+				<td>{{$a->fechanac}}</td>
+			 <td><input type="button" class="btn btn-warning" value="Editar"></td>
+            <td>
+                <form method="POST" action="{{ url("alumnos/{$a->id}") }}">
+			      @csrf
+			      @method('DELETE')
+			      <button type="submit" class="btn btn-danger">Eliminar</button>
+			    </form>
+                </td>
+            </tr>
 			@endforeach
 		</tbody>
 	</table>

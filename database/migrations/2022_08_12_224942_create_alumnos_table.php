@@ -21,6 +21,10 @@ class CreateAlumnosTable extends Migration
             $table->integer('ci');
             $table->integer('telefono');
             $table->string('direccion');
+            $table->string('gmail');
+            $table->string('profesion');
+            $table->string('genero');
+           $table->text('fechanac');
             $table->timestamps();
         });
     }
