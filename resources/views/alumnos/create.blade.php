@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="{{asset('css/estilos.css')}}">
+@include('app');
 <div class="container">
 	<div class="jumbotron">
    <div class="form-row align-items-center">
