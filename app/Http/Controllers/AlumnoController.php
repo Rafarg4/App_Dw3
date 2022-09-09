@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use DB;
 use App\Models\Alumno;
 use Illuminate\Http\Request;
-
+use Flash;
 class AlumnoController extends Controller
 {
     /**
@@ -12,12 +12,12 @@ class AlumnoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-       $alumnos = Alumno::paginate(4);
+    public function index(Request $request)
+    { 
+        $nombre = $request->get('buscarpor');
+        $alumnos = Alumno::where('nombre','like',"%$nombre%")->paginate(4);
        return view('alumnos.index',compact(
-        'alumnos'));  
-    
+        'alumnos'));   
     }
 
     /**
@@ -38,8 +38,27 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
+        $rules =[
+            'nombre' => 'required',
+             'apellido' => 'required|alpha',
+             'edad' => 'required', 
+             'ci' => 'required |numeric', 
+             'telefono' => 'required |max:10', 
+             'direccion' => 'required',
+            'gmail' => 'required|unique:alumnos,gmail',
+            'profesion' => 'required',
+            'genero' => 'required',
+            'fechanac' => 'required'
+        ];
+            $mensaje =[
+                'required' =>'El :attributed es requerido',
+                'fechanac.required' => 'La fecha de nacimiento es requerido',
+                'telefono.required' => 'El numero de telefono es requerido'
+        ];
+        $this->validate($request,$rules,$mensaje);
         $alumnos= request()->except('_token');
         Alumno::insert($alumnos);
+        Flash::success('Creado correctamente');
         return redirect (route('alumnos.index'));
     }
 
@@ -49,9 +68,10 @@ class AlumnoController extends Controller
      * @param  \App\Models\Alumno  $alumno
      * @return \Illuminate\Http\Response
      */
-    public function show(Alumno $alumno)
+    public function show( $id)
     {
-        //
+        $alumnos=Alumno::findorFail($id);
+        return view ('alumnos.show', compact('alumnos'));
     }
 
     /**
@@ -77,6 +97,7 @@ class AlumnoController extends Controller
     {
       $alumnos=request()->except(['_token','_method']);
       Alumno::where('id','=',$id)->update($alumnos);
+       Flash::success('Actualizado correctamente');
         return redirect ('alumnos');
     }
 
@@ -89,6 +110,7 @@ class AlumnoController extends Controller
     public function destroy($id)
     {
         Alumno::destroy($id);
+        Flash::error('Eliminado correctamente');
         return redirect('alumnos');
     }
 }
