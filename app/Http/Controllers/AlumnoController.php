@@ -48,12 +48,14 @@ class AlumnoController extends Controller
             'gmail' => 'required|unique:alumnos,gmail',
             'profesion' => 'required',
             'genero' => 'required',
-            'fechanac' => 'required'
+            'fechanac' => 'required',
+            'curso_id' => 'required'
         ];
             $mensaje =[
                 'required' =>'El :attributed es requerido',
                 'fechanac.required' => 'La fecha de nacimiento es requerido',
-                'telefono.required' => 'El numero de telefono es requerido'
+                'telefono.required' => 'El numero de telefono es requerido',
+                'curso_id.required' => 'El  curso es requerido'
         ];
         $this->validate($request,$rules,$mensaje);
         $alumnos= request()->except('_token');

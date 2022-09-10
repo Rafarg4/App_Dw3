@@ -1,3 +1,4 @@
+@include('menu')
 @include('app');
 <div class="container">
 	<div class="jumbotron">
