@@ -23,6 +23,7 @@
 				<th>Profesion</th>
 				<th>Genero</th>
 				<th>Fecha de nacimineto</th>
+				<th>Cursos</th>
 				<th>Opciones</th>				
 			</tr>
 		</thead>
@@ -39,6 +40,7 @@
 				<td>{{$a->profesion}}</td>
 				<td>{{$a->genero}}</td>
 				<td>{{$a->fechanac}}</td>
+				<td>{{$a->cursos->nombre}}</td>
 			 <td>
 			 	<div class="btn-group">
 			 	<a href="{{url('/alumnos/'.$a->id.'/edit')}}">

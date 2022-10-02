@@ -24,5 +24,7 @@ class Alumno extends Model
 
 
     ];
-
+    public function cursos (){
+        return $this->belongsTo('App\Models\Curso','curso_id');
+    }
 }

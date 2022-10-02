@@ -5,6 +5,7 @@ use DB;
 use App\Models\Alumno;
 use Illuminate\Http\Request;
 use Flash;
+use App\Models\Curso;
 class AlumnoController extends Controller
 {
     /**
@@ -27,7 +28,8 @@ class AlumnoController extends Controller
      */
     public function create()
     {
-        return view('alumnos.create');
+        $cursos =Curso::pluck('nombre','id');
+        return view('alumnos.create',compact('cursos'));
     }
 
     /**
@@ -72,8 +74,9 @@ class AlumnoController extends Controller
      */
     public function show( $id)
     {
+        $cursos =Curso::pluck('nombre','id');
         $alumnos=Alumno::findorFail($id);
-        return view ('alumnos.show', compact('alumnos'));
+        return view ('alumnos.show', compact('alumnos','cursos'));
     }
 
     /**
@@ -83,9 +86,10 @@ class AlumnoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {   
+    $cursos =Curso::pluck('nombre','id');
        $alumnos=Alumno::findorFail($id);
-        return view ('alumnos.edit', compact('alumnos'));
+        return view ('alumnos.edit', compact('alumnos','cursos'));
     }
 
     /**

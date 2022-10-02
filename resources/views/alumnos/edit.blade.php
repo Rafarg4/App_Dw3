@@ -33,6 +33,10 @@
 	</select>
 	<label for="fechanac">Fecha de nacimiento</label>
 	<input type="date" class="form-control" name="fechanac" id="fechanac" value="{{$alumnos->fechanac}}">
+	<div class="form-group col-md-13">
+	 {!! Form::label('curso_id', 'Seleccionar curso:') !!}
+     {!! Form::select('curso_id', $cursos, null, ['class' => 'form-control custom-select','placeholder'=>'Seleccione']) !!}
+	</div>
 	<br>
     <input type="submit" class="btn btn-primary" value="Guardar">
     <a class="pull-right" href="{{route('alumnos.index')}} "><button type="button" class="btn btn-danger">Cancelar</button></a>
